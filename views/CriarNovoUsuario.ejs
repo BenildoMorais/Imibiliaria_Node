@@ -60,34 +60,34 @@
             <h5 class="card-title">Dados do funcionario</h5>
 
             <!-- Multi Columns Form -->
-            <form class="row g-3">
+            <form class="row g-3" action="/CriarUsuario" method="post">
               <div class="col-md-12">
-                <label for="inputName5" class="form-label">Nome Completo</label>
-                <input type="text" class="form-control" id="inputName5">
+                <label for="nomeCompleto" class="form-label">Nome Completo</label>
+                <input type="text" class="form-control" id="nomeCompleto" name="nomeCompleto">
               </div>
               <div class="col-md-6">
                 <label for="username" class="form-label">Username</label>
-                <input type="text" class="form-control" id="username" >
+                <input type="text" class="form-control" id="username" name="username">
               </div>
               <div class="col-md-6">
-                <label for="inputPassword5" class="form-label">Password</label>
-                <input type="password" class="form-control" id="inputPassword5">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" name="password">
               </div>
               <div class="col-md-6">
-                <label for="inputEmail5" class="form-label">Email</label>
-                <input type="email" class="form-control" id="inputEmail5">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email">
               </div>
               <div class="col-md-6">
                 <label for="telefone" class="form-label">Telefone</label>
-                <input type="number" class="form-control" id="telefone">
+                <input type="number" class="form-control" id="telefone" name="telefone">
               </div>
               <div class="col-md-4">
-                <label for="inputState" class="form-label">Tipo</label>
-                <select id="inputState" class="form-select">
-                  <option selected>Visitante</option>
-                  <option>Proprietario</option>
-                  <option>Inquilino</option>
-                  <option>Administrador</option>
+                <label for="tipo" class="form-label">Tipo</label>
+                <select id="tipo" name="tipo" class="form-select">
+                  <option value="Visitante">Visitante</option>
+                  <option value="Proprietario">Proprietario</option>
+                  <option value="Inquilino">Inquilino</option>
+                  <option value="Administrador">Administrador</option>
                 </select>
               </div>
               <div class="text-center">

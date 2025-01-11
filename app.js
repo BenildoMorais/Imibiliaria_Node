@@ -5,8 +5,6 @@ const mongoose = require('mongoose');
 const User = require('./models/user');
 const dotenv = require('dotenv');
 dotenv.config({path: 'config.env'});
-
-
 const PORT = process.env.PORT || 5000;
 
 // conecção a MongoDB
@@ -20,8 +18,12 @@ mongoose.connect(dbURI)
 // Register view engine
 app.set('view engine', 'ejs');
 
+
 // middleware para ficheiros estáticos
 app.use(express.static('views'));
+
+// middleware para receber os ficheiros com post
+app.use(express.urlencoded({extended : true}));
 
 app.use(morgan('dev'));
 
@@ -59,6 +61,17 @@ app.get('/', (req,res) => {
 
 app.get('/CriarUsuario', (req,res) => {
     res.render('CriarNovoUsuario', {caminho: 'Novo Usuario'});
+});
+
+app.post('/CriarUsuario', (req,res) => {
+    const user = new User(req.body);
+    user.save()
+    .then((result) => {
+        res.redirect('/ListarUsuarios')
+    })
+    .catch((err) => {
+        console.log(err);
+    })
 });
 
 app.get('/ListarUsuarios', (req,res) => {
