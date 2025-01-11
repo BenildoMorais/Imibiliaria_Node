@@ -27,24 +27,6 @@ app.use(express.urlencoded({extended : true}));
 
 app.use(morgan('dev'));
 
-app.get('/addUser', (req,res) => {
-    const user = new User({
-        nomeCompleto: 'Felizardo Rui Samito',
-        username: 'FelizardoSamito',
-        email: 'qualquercoisa@gmail.com',
-        telefone: 87000000,
-        tipo: 'Proprietario',
-        password: '0000'
-    });
-
-    user.save()
-    .then((result) =>{
-        res.send(result)
-    })
-    .catch((err) => {
-        console.log(err);
-    });
-});
 
 app.get('/login', (req,res) => {
     res.render('Login');
