@@ -84,8 +84,35 @@ app.get('/ListarUsuarios', (req,res) => {
     });
 });
 
+app.delete('/ApagarUsuario:id', (req,res) => {
+    const id = req.params.id;
+
+    
+    User.findByIdAndDelete(id)
+    .then((result) => {
+        res.json({redirect: '/ListarUsuarios'});
+    })
+    .catch((err) => {
+        console.log(err);
+    });
+
+});
+
 app.get('/PerfilUsuario', (req,res) => {
-    res.render('PerfilUsuario', {caminho: 'Perfil do Usuario'});
+    //res.render('PerfilUsuario', {caminho: 'Perfil do Usuario'});
+    res.redirect('/home');
+});
+
+app.get('/PerfilUsuario:id', (req,res) => {
+    const id = req.params.id;
+    User.findById(id)
+    .then((result) => {
+        res.render('PerfilUsuario', {caminho: 'Perfil do Usuario', result});
+    })
+    .catch((err) => {
+        console.log(err);
+    });
+
 });
 
 // 404

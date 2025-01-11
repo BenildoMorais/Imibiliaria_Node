@@ -43,7 +43,7 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Perfil do username</h1>
+      <h1>Perfil do Usuario</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
@@ -61,8 +61,8 @@
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
               <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-              <h2>Username</h2>
-              <h3>tipo de usuario</h3>
+              <h2><%= result.username%></h2>
+              <h3><%= result.tipo%></h3>
               <div class="social-links mt-2">
                 <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
                 <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
@@ -89,22 +89,32 @@
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label ">Nome Completo</div>
-                    <div class="col-lg-9 col-md-8">Kevin Anderson</div>
+                    <div class="col-lg-9 col-md-8"><%= result.nomeCompleto%></div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label ">Username</div>
+                    <div class="col-lg-9 col-md-8"><%= result.username%></div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Tipo de usuario</div>
-                    <div class="col-lg-9 col-md-8">Mutare Soluções</div>
+                    <div class="col-lg-9 col-md-8"><%= result.tipo%></div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Telefone</div>
-                    <div class="col-lg-9 col-md-8">(436) 486-3538 x29071</div>
+                    <div class="col-lg-9 col-md-8"><%= result.telefone%></div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Email</div>
-                    <div class="col-lg-9 col-md-8">k.anderson@example.com</div>
+                    <div class="col-lg-9 col-md-8"><%= result.email%></div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Password</div>
+                    <div class="col-lg-9 col-md-8"><%= result.password%></div>
                   </div>
 
                 </div>

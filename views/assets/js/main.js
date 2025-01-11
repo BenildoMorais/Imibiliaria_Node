@@ -1,10 +1,3 @@
-/**
-* Template Name: NiceAdmin
-* Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-* Updated: Apr 20 2024 with Bootstrap v5.3.3
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
 
 (function() {
   "use strict";
@@ -317,3 +310,17 @@
   }
 
 })();
+
+// Fução para apagar um usuario
+
+function apagar(id) {
+  const endpoint = '/ApagarUsuario'+id;
+  console.log(endpoint);
+
+  fetch(endpoint,{
+  method: 'DELETE'
+})
+.then((response) => response.json())
+.then((data) => window.location.href = data.redirect)
+.catch(err => console.log(err));
+}
