@@ -4,6 +4,9 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 const User = require('./models/user');
 const dotenv = require('dotenv');
+const multer = require('multer');
+const path = require('path');
+const upload = require('./config/multer');
 dotenv.config({path: 'config.env'});
 const PORT = process.env.PORT || 5000;
 
@@ -27,6 +30,9 @@ app.use(express.urlencoded({extended : true}));
 
 app.use(morgan('dev'));
 
+    // Para upload de imagens
+    //const upload = multer({ dest: './views/assets/img/user' });
+
 
 app.get('/login', (req,res) => {
     res.render('Login');
@@ -45,8 +51,14 @@ app.get('/CriarUsuario', (req,res) => {
     res.render('CriarNovoUsuario', {caminho: 'Novo Usuario'});
 });
 
-app.post('/CriarUsuario', (req,res) => {
+app.post('/CriarUsuario', upload.single('imagem'), (req,res) => {
+
+    const imagem = req.file;
+
     const user = new User(req.body);
+
+    user.imagem = imagem.path.replace(/^views[\\/]/, '').replace(/\\/g, '/');
+
     user.save()
     .then((result) => {
         res.redirect('/ListarUsuarios')

@@ -15,13 +15,17 @@ const userSchema = new Schema({
         required: true,
         lowercase: true
     },
+    imagem: {
+        type: String,
+        required: false,
+    },
     telefone: {
         type: Number,
         required: true
     },
     tipo: {
         type: String,
-        required: true,
+        required: true
     },
     password: {
         type: String,
