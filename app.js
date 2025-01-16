@@ -2,11 +2,9 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 const mongoose = require('mongoose');
-const User = require('./models/user');
 const dotenv = require('dotenv');
-const multer = require('multer');
-const path = require('path');
-const upload = require('./config/multer');
+
+const userRoutes = require('./routes/userRoutes');
 dotenv.config({path: 'config.env'});
 const PORT = process.env.PORT || 5000;
 
@@ -47,67 +45,8 @@ app.get('/', (req,res) => {
     res.redirect('/Login');
 });
 
-app.get('/CriarUsuario', (req,res) => {
-    res.render('CriarNovoUsuario', {caminho: 'Novo Usuario'});
-});
-
-app.post('/CriarUsuario', upload.single('imagem'), (req,res) => {
-
-    const imagem = req.file;
-
-    const user = new User(req.body);
-
-    user.imagem = imagem.path.replace(/^views[\\/]/, '').replace(/\\/g, '/');
-
-    user.save()
-    .then((result) => {
-        res.redirect('/ListarUsuarios')
-    })
-    .catch((err) => {
-        console.log(err);
-    })
-});
-
-app.get('/ListarUsuarios', (req,res) => {
-    User.find().sort({ createAt: -1})
-    .then((result) => {
-        res.render('ListarUsuarios', {caminho: 'Lista de Usuarios', users : result});
-    })
-    .catch((err) => {
-        console.log(err);
-    });
-});
-
-app.delete('/ApagarUsuario:id', (req,res) => {
-    const id = req.params.id;
-
-    
-    User.findByIdAndDelete(id)
-    .then((result) => {
-        res.json({redirect: '/ListarUsuarios'});
-    })
-    .catch((err) => {
-        console.log(err);
-    });
-
-});
-
-app.get('/PerfilUsuario', (req,res) => {
-    //res.render('PerfilUsuario', {caminho: 'Perfil do Usuario'});
-    res.redirect('/home');
-});
-
-app.get('/PerfilUsuario:id', (req,res) => {
-    const id = req.params.id;
-    User.findById(id)
-    .then((result) => {
-        res.render('PerfilUsuario', {caminho: 'Perfil do Usuario', result});
-    })
-    .catch((err) => {
-        console.log(err);
-    });
-
-});
+// userRoutes
+app.use('/User',userRoutes);
 
 // 404
 app.use((req,res) => {

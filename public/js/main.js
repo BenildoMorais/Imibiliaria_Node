@@ -314,8 +314,7 @@
 // Fução para apagar um usuario
 
 function apagar(id) {
-  const endpoint = '/ApagarUsuario'+id;
-  console.log(endpoint);
+  const endpoint = '/User/Apagar/'+id;
 
   fetch(endpoint,{
   method: 'DELETE'

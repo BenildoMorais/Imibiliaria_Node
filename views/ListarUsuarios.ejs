@@ -46,7 +46,7 @@
       <h1>Página de Usuarios</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item"><a href="/home">Home</a></li>
           <li class="breadcrumb-item">Usuarios</li>
           <li class="breadcrumb-item active">Lista</li>
         </ol>
@@ -87,7 +87,7 @@
                     minute: 'numeric', 
                     second: 'numeric' 
                 })%></td>
-                  <td><a href="/PerfilUsuario<%= user.id %>"><i class="bi bi-person-lines-fill"></i></a></td>
+                  <td><a href="/User/Perfil/<%= user.id %>"><i class="bi bi-person-lines-fill"></i></a></td>
                   <td><a class="apagar" onclick="apagar('<%= user.id %>')" ><i class="bi bi-trash"></i></a></td>
                   </tr>
                   <% }) %>
