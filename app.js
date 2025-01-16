@@ -23,7 +23,7 @@ app.set('view engine', 'ejs');
 
 
 // middleware para ficheiros estáticos
-app.use(express.static('views'));
+app.use('/public', express.static(__dirname + '/public'));
 
 // middleware para receber os ficheiros com post
 app.use(express.urlencoded({extended : true}));
