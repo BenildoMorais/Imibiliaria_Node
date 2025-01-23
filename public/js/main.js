@@ -325,13 +325,14 @@ function apagar(id) {
 }
 
 // User login
-/* const loginForm = document.getElementById('loginForm');
+const loginForm = document.getElementById('loginForm');
+const usernameError = document.getElementById('username.error');
+const passwordError = document.getElementById('password.error');
 
 loginForm.addEventListener('submit', async (e) => {
   e.preventDefault();
   const username = loginForm.username.value;
   const password = loginForm.password.value;
- 
 
   try {
     const res = await fetch('/Login', {
@@ -341,11 +342,19 @@ loginForm.addEventListener('submit', async (e) => {
     });
 
     const data = await res.json();
-    console.log(data);
-    location.assign('/');
+    if (data.errors) {
+      usernameError.textContent = data.errors.username;
+      passwordError.textContent = data.errors.password;
+      document.getElementById('username').textContent = data.errors.username;
+    }
+    
+    if(data.user){
+      // se o token for verificado vamos a home page
+        location.assign(data.path);
+    }
 
   } catch (err) {
     console.log(err);
   }
 
-});*/
+});

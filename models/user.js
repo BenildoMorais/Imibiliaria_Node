@@ -49,17 +49,15 @@ userSchema.pre('save', async function (next) {
 // Login do usuario "Método estático"
 
 userSchema.statics.login = async function(username, password) {
-
     const user = await this.findOne({username});
-    
     if(user){
      auth = await bcrypt.compare(password, user.password);
         if(auth){
             return user;
         }
-        throw Error('Password Incorreta');
+        throw Error('password Incorreta');
     }
-    throw Error('Email Incorreto');
+    throw Error('username Incorreto');
 };
 
 const User = mongoose.model('Users', userSchema);
