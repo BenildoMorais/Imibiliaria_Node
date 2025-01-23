@@ -1,4 +1,35 @@
+const { isNull } = require('lodash');
 const User = require('../models/user');
+
+//Suporte de Erros
+const handleErrors = (err) => {
+    console.log(err.message, err.code);
+    let errors = {
+        nomeCompleto: '',
+        username: '',
+        email: '',
+        imagem: '',
+        telefone: '',
+        tipo: '',
+        password: ''
+    };
+
+    // erro de duplicação
+    if (err.code === 11000) {
+        errors.nomeCompleto = 'Esse usuario já foi registrado';
+        errors.username = 'Esse usuario já foi registrado';
+        return errors;
+    }
+
+    // validação de erros
+    if(err.message.includes('Users validation failed')){
+        Object.values(err.errors).forEach(({properties}) => {
+            errors[properties.path] = properties.message;
+        });
+    }
+
+    return errors;
+}
 
 const user_criar_get = (req,res) => {
     res.render('CriarNovoUsuario', {caminho: 'Novo Usuario'});
@@ -9,14 +40,17 @@ const user_criar_post = (req,res) => {
 
     const user = new User(req.body);
 
-    user.imagem = '/'+imagem.path.replace(/\\/g, '/');
+    if (imagem && imagem.path) {
+        user.imagem = '/'+imagem.path.replace(/\\/g, '/');
+    };
 
     user.save()
     .then((result) => {
         res.redirect('/User/Listar');
     })
     .catch((err) => {
-        console.log(err);
+        const errors = handleErrors (err);
+        res.status(400).json({errors});
     });
 }
 
@@ -27,6 +61,7 @@ const user_listar = (req,res) => {
     })
     .catch((err) => {
         console.log(err);
+        res.status(500).send('Algo Deu errado');
     });
 }
 
@@ -39,6 +74,7 @@ const user_apagar = (req,res) => {
     })
     .catch((err) => {
         console.log(err);
+        res.status(500).send('Algo Deu errado');
     });
 
 }
@@ -51,6 +87,7 @@ const user_perfil = (req,res) => {
     })
     .catch((err) => {
         console.log(err);
+        res.status(500).send('Algo Deu errado');
     });
 }
 

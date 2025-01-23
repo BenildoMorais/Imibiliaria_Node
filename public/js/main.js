@@ -323,3 +323,29 @@ function apagar(id) {
 .then((data) => window.location.href = data.redirect)
 .catch(err => console.log(err));
 }
+
+// User login
+/* const loginForm = document.getElementById('loginForm');
+
+loginForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const username = loginForm.username.value;
+  const password = loginForm.password.value;
+ 
+
+  try {
+    const res = await fetch('/Login', {
+      method: 'POST',
+      body: JSON.stringify({ username , password }),
+      headers: { 'Content-Type': 'application/json' }
+    });
+
+    const data = await res.json();
+    console.log(data);
+    location.assign('/');
+
+  } catch (err) {
+    console.log(err);
+  }
+
+});*/
