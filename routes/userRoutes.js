@@ -12,6 +12,8 @@ router.get('/Listar', userController.user_listar);
 
 router.delete('/Apagar/:id', userController.user_apagar);
 
-router.get('/Perfil/:id', userController.user_perfil);
+router.get('/Perfil', userController.user_perfil);
+
+router.get('/Perfil/:id', userController.list_user_perfil);
 
 module.exports = router;

@@ -1,5 +1,5 @@
 const User = require('../models/user');
-//const app = require('../app');
+const jwt = require('jsonwebtoken');
 const app = require('../config/SuporteErros');
 
 const user_criar_get = (req,res) => {
@@ -50,7 +50,7 @@ const user_apagar = (req,res) => {
 
 }
 
-const user_perfil = (req,res) => {
+const list_user_perfil = (req,res) => {
     const id = req.params.id;
     User.findById(id)
     .then((result) => {
@@ -62,10 +62,32 @@ const user_perfil = (req,res) => {
     });
 }
 
+const user_perfil = (req,res) => {
+    const token = req.cookies.B370z
+
+     // Verificação do token
+        if (token) {
+            jwt.verify(token, 'B370z', async (err, decodedToken) => {
+                if (err){
+                    console.log(err.message);
+                    console.log('Falha na verificação');
+                    res.redirect('/Login');
+                }else{
+                    res.redirect('Perfil/'+decodedToken.id);
+                }
+            });
+        }else{
+            console.log('Não existe a verificação');
+            res.redirect('/Login');
+        }
+
+}
+
 module.exports = {
     user_criar_get,
     user_criar_post,
     user_listar,
     user_apagar,
-    user_perfil
+    user_perfil,
+    list_user_perfil
 };

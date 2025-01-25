@@ -12,7 +12,7 @@ const login_post = async (req,res) => {
     const {username , password} = req.body;
     try {
         const user = await User.login(username, password);
-        const token = createToken(username);
+        const token = createToken(user._id);
         res.cookie('B370z', token, {httpOnly: true, maxAge: maxAge * 1000});
         res.status(200).json({user: user._id, path: '/'});
     } catch (err) {
