@@ -26,7 +26,13 @@ const login_get = (req,res) => {
     res.render('Login');
 }
 
+const logout = (req,res) => {
+    res.cookie('B370z', '', {maxAge: 1});
+    res.redirect('/');
+}
+
 module.exports = {
     login_post,
-    login_get
+    login_get,
+    logout
 };
