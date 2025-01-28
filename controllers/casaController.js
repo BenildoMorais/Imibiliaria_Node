@@ -15,7 +15,7 @@ const casa_criar_post = (req,res) => {
 
 const casa_listar = (req,res) => {
     
-    res.render('ListarResidencia');
+    res.render('ListarResidencias');
     
 };
 

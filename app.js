@@ -5,6 +5,9 @@ const dotenv = require('dotenv');
 const cookieParser = require('cookie-parser');
 const userRoutes = require('./routes/userRoutes');
 const authRoutes = require('./routes/authRoutes');
+const manutencaoRoutes = require('./routes/manutencaoRoutes');
+const condominioRoutes = require('./routes/condominioRoutes');
+const casaRoutes = require('./routes/casaRoutes');
 const PORT = process.env.PORT || 5000;
 const { requireAuth, checkUser } = require('./middleware/authMiddleware');
 const app = express();
@@ -57,13 +60,13 @@ app.use('/', authRoutes);
 app.use('/User', requireAuth, userRoutes);
 
 // ManutencaoRoutes
-app.use('/Manutencao', requireAuth, userRoutes);
+app.use('/Manutencao', requireAuth, manutencaoRoutes);
 
 // CasaRoutes
-app.use('/Casa', requireAuth, userRoutes);
+app.use('/Casa', requireAuth, casaRoutes);
 
 // CondominioRoutes
-app.use('/Condominio', requireAuth, userRoutes);
+app.use('/Condominio', requireAuth, condominioRoutes);
 
 // 404
 app.use((req,res) => {
