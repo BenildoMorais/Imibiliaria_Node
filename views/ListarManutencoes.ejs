@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Lista de Manutenções</title>
+  <title>Usuarios</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -39,16 +39,16 @@
   <!-- ======= Sidebar ======= -->
   <%- include('./partials/sidebar.ejs') %>
 
-  <!-- ======= Main ======= -->
+  <!--====== Main =======-->
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Residencias</h1>
+      <h1>Página de Usuarios</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item">Residencias</li>
-          <li class="breadcrumb-item active">Listar</li>
+          <li class="breadcrumb-item"><a href="/home">Home</a></li>
+          <li class="breadcrumb-item">Usuarios</li>
+          <li class="breadcrumb-item active">Lista</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -58,48 +58,42 @@
       
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title">Clique na residencia para ver mais Detalhes</h5>
+            <h5 class="card-title">Tabela de Usuarios</h5>
 
             <!-- Table with hoverable rows -->
             <table class="table table-hover">
               <thead>
                 <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Proprietario</th>
-                  <th scope="col">Localização</th>
-                  <th scope="col">Renda</th>
-                  <th scope="col">Estado</th>
+                  <th scope="col">ID</th>
+                  <th scope="col">Username</th>
+                  <th scope="col">Tipo de Usuario</th>
+                  <th scope="col">Data de Adição</th>
+                  <th scope="col">Perfil</th>
+                  <th scope="col">Apagar</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Marcelo</td>
-                  <td>Maputo</td>
-                  <td>500mt</td>
-                  <td>ocupado</td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Certão</td>
-                  <td>Maputo</td>
-                  <td>300mt</td>
-                  <td>ocupado</td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>Fino</td>
-                  <td>Mutare</td>
-                  <td>400mt</td>
-                  <td>disponivel</td>
-                </tr>
-                <tr>
-                  <th scope="row">4</th>
-                  <td>Ester</td>
-                  <td>Matola</td>
-                  <td>20000Mt</td>
-                  <td>disponivel</td>
-                </tr>
+                <% if (users.length > 0) { %>
+                  <% users.forEach(user => {%>
+                  <tr>
+                  <th scope="row"><%= user.id%></th>
+                  <td><%= user.username%></td>
+                  <td><%= user.tipo%></td>
+                  <td><%= new Date(user.createdAt).toLocaleString('pt-BR', { 
+                    year: 'numeric', 
+                    month: 'short', 
+                    day: 'numeric', 
+                    hour: 'numeric', 
+                    minute: 'numeric', 
+                    second: 'numeric' 
+                })%></td>
+                  <td><a href="/User/Perfil/<%= user.id %>"><i class="bi bi-person-lines-fill"></i></a></td>
+                  <td><a class="apagar" onclick="apagar('<%= user.id %>')" ><i class="bi bi-trash"></i></a></td>
+                  </tr>
+                  <% }) %>
+                <% } else{ %>
+                <p>Ainda não tem usuarios Criados</p>
+                  <% } %>   
               </tbody>
             </table>
             <!-- End Table with hoverable rows -->

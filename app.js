@@ -6,7 +6,7 @@ const cookieParser = require('cookie-parser');
 const userRoutes = require('./routes/userRoutes');
 const authRoutes = require('./routes/authRoutes');
 const PORT = process.env.PORT || 5000;
-const { requireAuth } = require('./middleware/authMiddleware');
+const { requireAuth, checkUser } = require('./middleware/authMiddleware');
 const app = express();
 
 dotenv.config({path: 'config.env'});
@@ -37,6 +37,9 @@ mongoose.connect(dbURI)
 }))
 .catch((err)=> console.log(err));
 
+// Rotas
+app.get('*', checkUser);
+
 // home page
 app.get('/', requireAuth, (req,res) => {
     res.render('index');
@@ -52,6 +55,15 @@ app.use('/', authRoutes);
 
 // userRoutes
 app.use('/User', requireAuth, userRoutes);
+
+// ManutencaoRoutes
+app.use('/Manutencao', requireAuth, userRoutes);
+
+// CasaRoutes
+app.use('/Casa', requireAuth, userRoutes);
+
+// CondominioRoutes
+app.use('/Condominio', requireAuth, userRoutes);
 
 // 404
 app.use((req,res) => {
