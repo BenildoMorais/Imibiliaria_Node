@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const app = require('../config/SuporteErros');
+const Manutencao = require('../models/manutencao');
 
 const manutencao_criar_get = (req,res) => {
 
@@ -9,13 +10,28 @@ const manutencao_criar_get = (req,res) => {
 
 const manutencao_criar_post = (req,res) => {
 
-    res.redirect('/Manutencao/Listar');
+    const manutencao = new Manutencao(req.body);
+
+    manutencao.save()
+        .then((result) => {
+            res.redirect('/Manutencao/Listar');
+        })
+        .catch((err) => {
+            const errors = app.handleErrors(err);
+            res.status(400).json({errors});
+        });
 
 };
 
 const manutencao_listar = (req,res) => {
-    
-    res.render('ListarManutencoes');
+    Manutencao.find().sort({ createAt: -1})
+    .then((result) => {
+        res.render('ListarManutencoes', { manutencoes : result});
+    })
+    .catch((err) => {
+        console.log(err);
+        res.status(500).send('Algo Deu errado');
+    });
     
 };
 

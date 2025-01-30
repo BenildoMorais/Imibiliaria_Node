@@ -17,11 +17,12 @@ dotenv.config({path: 'config.env'});
 // Register view engine
 app.set('view engine', 'ejs');
 
-// middleware
-app.use(express.json());
+// middlewares
 
 // middleware para ficheiros estáticos
 app.use('/public', express.static(__dirname + '/public'));
+app.use(express.json());
+
 
 // middleware para receber os ficheiros com post
 app.use(express.urlencoded({extended : true}));

@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const multer = require('multer');
 const manutencaoController = require('../controllers/manutencaoController');
 
 router.get('/Criar', manutencaoController.manutencao_criar_get);
