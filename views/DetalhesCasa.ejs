@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Lista de Condominios</title>
+  <title>Detalhes da Casa</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -45,62 +45,71 @@
       <main id="main" class="main">
 
         <div class="pagetitle">
-          <h1>Casas</h1>
+          <h1>Detalhes da casa</h1>
           <nav>
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="/home">Home</a></li>
-              <li class="breadcrumb-item">Casas</li>
-              <li class="breadcrumb-item active">Listar</li>
+              <li class="breadcrumb-item">Casa</li>
+              <li class="breadcrumb-item active">Detalhes</li>
             </ol>
           </nav>
         </div><!-- End Page Title -->
 
-
-        <section class="section faq">
+        <section class="section profile">
           <div class="row">
-          
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Tabela de Casas</h5>
-    
-                <!-- Table with hoverable rows -->
-                <table class="table table-hover">
-                  <thead>
-                    <tr>
-                      <th scope="col">ID</th>
-                      <th scope="col">Proprietario</th>
-                      <th scope="col">Localizacao</th>
-                      <th scope="col">Tipo</th>
-                      <th scope="col">Renda</th>
-                      <th scope="col">Fotos</th>
-                      <th scope="col">Apagar</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <% if (casas.length > 0) { %>
-                      <% casas.forEach(casa => {%>
-                      <tr>
-                      <th scope="row"><%= casa.id%></th>
-                      <td><%= casa.proprietario%></td>
-                      <td><%= casa.localizacao%></td>
-                      <td><%= casa.numeroQuartos%></td>
-                      <td><%= casa.renda%></td>
-                      <td><a href="/Casa/Detalhes/<%= casa.id %>"><i class="bi bi-house-door"></i></a></td>
-                      <td><a class="apagarCasa" onclick="apagar('<%= casa.id %>', event)" ><i class="bi bi-trash"></i></a></td>
-                      </tr>
-                      <% }) %>
-                    <% } else{ %>
-                    <p>Ainda não tem Casas Criados</p>
-                      <% } %>   
-                  </tbody>
-                </table>
-                <!-- End Table with hoverable rows -->
-    
+            <div class="col-xl-12">
+
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Proprietário <%= result.proprietario%>
+                  </h5>
+
+                  <!-- Slides with indicators -->
+                  <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                      <% if (result.fotos.length > 0) { %>
+                        <% result.fotos.forEach((foto, index) => { %>
+                          <button type="button" data-bs-target="#carouselExampleIndicators" 
+                                  data-bs-slide-to="<%= index %>" 
+                                  class="<%= index === 0 ? 'active' : '' %>" 
+                                  <%= index === 0 ? 'aria-current="true"' : '' %> 
+                                  aria-label="Slide <%= index + 1 %>">
+                          </button>
+                        <% }) %>
+                      <% } %>
+                    </div>
+                    
+                    <div class="carousel-inner">
+                      <% if (result.fotos.length > 0) { %>
+                        <% result.fotos.forEach((foto, index) => { %>
+                          <div class="carousel-item <%= index === 0 ? 'active' : '' %>">
+                            <img src="<%= foto %>" class="d-block w-100" alt="Casa do <%= result.proprietario %>">
+                          </div>
+                        <% }) %>
+                      <% } else { %>
+                        <p>Sem fotos da Casa</p>
+                      <% } %>
+                    </div>
+                    
+
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                      data-bs-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                      data-bs-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Next</span>
+                    </button>
+
+                  </div><!-- End Slides with indicators -->
+
+                </div>
               </div>
+
             </div>
-    
           </div>
-    
         </section>
 
       </main><!-- End Main -->

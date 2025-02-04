@@ -313,8 +313,19 @@
 
 // Fução para apagar um usuario
 
-function apagar(id) {
-  const endpoint = '/User/Apagar/'+id;
+function apagar(id, event) {
+
+  const elemento = event.currentTarget; 
+  
+  var endpoint = '';
+
+  if (elemento.classList == 'apagarCasa'){
+      endpoint = '/Casa/Apagar/'+id;
+  }
+
+  if (elemento.classList == 'apagarUser'){
+    endpoint = '/User/Apagar/'+id;
+  }
 
   fetch(endpoint,{
   method: 'DELETE'

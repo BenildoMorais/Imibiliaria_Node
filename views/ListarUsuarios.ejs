@@ -82,13 +82,13 @@
                   <td><%= new Date(user.createdAt).toLocaleString('pt-BR', { 
                     year: 'numeric', 
                     month: 'short', 
-                    day: 'numeric', 
-                    hour: 'numeric', 
+                    day: 'numeric',
+                    hour: 'numeric',
                     minute: 'numeric', 
                     second: 'numeric' 
                 })%></td>
                   <td><a href="/User/Perfil/<%= user.id %>"><i class="bi bi-person-lines-fill"></i></a></td>
-                  <td><a class="apagar" onclick="apagar('<%= user.id %>')" ><i class="bi bi-trash"></i></a></td>
+                  <td><a class="apagarUser" onclick="apagar('<%= user.id %>', event)" ><i class="bi bi-trash"></i></a></td>
                   </tr>
                   <% }) %>
                 <% } else{ %>

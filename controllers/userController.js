@@ -8,6 +8,7 @@ const user_criar_get = (req,res) => {
 
 const user_criar_post = (req,res) => {
     const imagem = req.file;
+    console.log(req.file);
 
     const user = new User(req.body);
 

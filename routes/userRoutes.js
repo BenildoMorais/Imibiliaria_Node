@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
-const upload = require('../config/multer');
+const {uploadPerfil} = require('../config/multer');
 const userController = require('../controllers/userController');
 
 router.get('/Criar', userController.user_criar_get);
 
-router.post('/Criar', upload.single('imagem'), userController.user_criar_post);
+router.post('/Criar', uploadPerfil.single('imagem'), userController.user_criar_post);
 
 router.get('/Listar', userController.user_listar);
 

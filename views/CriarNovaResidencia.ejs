@@ -63,82 +63,75 @@
                 <h5 class="card-title">Criar nova Residencia</h5>
 
                 <!-- General Form Elements -->
-                <form>
+                <form action="/Casa/Criar" method="post" enctype="multipart/form-data">
                   <div class="row mb-3">
-                    <label for="inputText" class="col-sm-2 col-form-label">Localização</label>
+                    <label for="localizacao" class="col-sm-2 col-form-label">Localização</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control">
+                      <input type="text" id="localizacao" name="localizacao" class="form-control">
                     </div>
                   </div>
 
                   <div class="row mb-3">
-                    <label for="inputPassword" class="col-sm-2 col-form-label">Descrição</label>
+                    <label for="descricao" class="col-sm-2 col-form-label">Descrição</label>
                     <div class="col-sm-10">
-                      <textarea class="form-control" style="height: 100px"></textarea>
+                      <textarea class="form-control" id="descricao" name="descricao" style="height: 100px"></textarea>
                     </div>
                   </div>
 
                   <div class="row mb-3">
-                    <label for="inputNumber" class="col-sm-2 col-form-label">Fotos</label>
+                    <label for="fotos" class="col-sm-2 col-form-label">Fotos</label>
                     <div class="col-sm-10">
-                      <input class="form-control" type="file" id="formFile">
+                      <input class="form-control" type="file" id="fotos" name="fotos" accept=".png,.jpg,.jpeg" multiple>
                     </div>
                   </div>
 
                   <div class="row mb-3">
-                    <label class="col-sm-2 col-form-label">Condominio</label>
+                    <label class="col-sm-2 col-form-label" for="proprietario">Proprietario</label>
                     <div class="col-sm-10">
-                      <select class="form-select" aria-label="Default select example">
-                        <option selected>Selecione um Condominio</option>
-                        <option value="1">Mutare Soluções</option>
-                        <option value="2">MDZ</option>
-                        <option value="3">Mueda</option>
-                        <option value="4">RivasService</option>
-                        <option value="5">123 Capital SA</option>
+                      <select class="form-select" id="proprietario" name="proprietario"
+                        aria-label="Default select example">
+                        <option selected>Indique o proprietario da residencia</option>
+                        <% if (users.length> 0) { %>
+                          <% users.forEach(user=> {%>
+                            <% if (user.tipo=='Proprietario' ) { %>
+                              <option value="<%= user.username%>">
+                                <%= user.username%>
+                              </option>
+                              <% } %>
+                                <% }) %>
+                                  <% } else{ %>
+                                    <p>Ainda não tem usuarios Criados</p>
+                                    <% } %>
                       </select>
                     </div>
                   </div>
 
                   <div class="row mb-3">
-                    <label class="col-sm-2 col-form-label">Proprietario</label>
-                    <div class="col-sm-10">
-                      <select class="form-select" aria-label="Default select example">
-                        <option selected>Selecione o Proprietario</option>
-                        <option value="1">Mutare Soluções</option>
-                        <option value="2">MDZ</option>
-                        <option value="3">Mueda</option>
-                        <option value="4">RivasService</option>
-                        <option value="5">123 Capital SA</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div class="row mb-3">
-                    <label for="inputText" class="col-sm-2 col-form-label">Renda</label>
+                    <label for="renda" class="col-sm-2 col-form-label">Renda</label>
                     <div class="col-sm-2">
-                      <input type="number" class="form-control">
+                      <input type="number" id="renda" name="renda" class="form-control">
                     </div>
                   </div>
 
                   <div class="row mb-3">
                     <div class="col-sm-2">
-                      <label class="form-check-label" for="gridRadios1">
+                      <label class="form-check-label" for="numeroQuartos">
                         Número de quartos
                       </label>
                     </div>
                     <div class="col-sm-1">
-                      <input type="number" class="form-control">
+                      <input type="number" id="numeroQuartos" name="numeroQuartos" class="form-control">
                     </div>
                   </div>
 
-              </div>
+                  <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <button type="reset" class="btn btn-secondary">Limpar todos os Campos</button>
+                  </div>
 
-              <div class="text-center">
-                <button type="submit" class="btn btn-primary">Guardar</button>
-                <button type="reset" class="btn btn-secondary">Limpar todos os Campos</button>
-              </div>
+                </form><!-- End General Form Elements -->
 
-              </form><!-- End General Form Elements -->
+              </div>
 
             </div>
           </div>
@@ -161,7 +154,6 @@
         <script src="/public/vendor/quill/quill.js"></script>
         <script src="/public/vendor/simple-datatables/simple-datatables.js"></script>
         <script src="/public/vendor/tinymce/tinymce.min.js"></script>
-        <script src="/public/vendor/php-email-form/validate.js"></script>
 
         <!-- Template Main JS File -->
         <script src="/public/js/main.js"></script>

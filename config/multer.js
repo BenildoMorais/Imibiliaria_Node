@@ -1,14 +1,24 @@
 const multer = require('multer');
 
-const storage = multer.diskStorage({
+const storagePerfil = multer.diskStorage({
     destination: function(req, imagem, cb){
-        cb(null, './public/img/user')
+        cb(null, './public/img/user');
     },
     filename: function(req, imagem, cb){
-        cb(null, Date.now() + imagem.originalname)
+        cb(null, Date.now() + imagem.originalname);
     }
 });
 
-const upload = multer({storage});
+const storageCasa = multer.diskStorage({
+    destination: function(req, file, cb){
+        cb(null, './public/img/casas');
+    },
+    filename: function(req, file, cb){
+        cb(null, Date.now() + file.originalname);
+    }
+});
 
-module.exports = upload;
+const uploadPerfil = multer({storage: storagePerfil});
+const uploadCasa = multer({storage: storageCasa});
+
+module.exports = { uploadPerfil, uploadCasa };
