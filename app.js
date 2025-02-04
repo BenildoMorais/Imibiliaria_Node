@@ -46,7 +46,7 @@ app.get('*', checkUser);
 
 // home page
 app.get('/', requireAuth, (req,res) => {
-    res.render('index');
+    res.redirect('Casa/Listar');
 });
 
 // Redirecionamento

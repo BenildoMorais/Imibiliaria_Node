@@ -1,4 +1,4 @@
-const jwt = require('jsonwebtoken');
+const Condominio = require('../models/condominio');
 const app = require('../config/SuporteErros');
 
 const condominio_criar_get = (req,res) => {
@@ -8,6 +8,17 @@ const condominio_criar_get = (req,res) => {
 };
 
 const condominio_criar_post = (req,res) => {
+
+    const condominio = new Condominio(req.body);
+
+    condominio.save()
+    .then((result) => {
+        res.redirect('/User/Listar');
+    })
+    .catch((err) => {
+        const errors = app.handleErrors(err);
+        res.status(400).json({errors});
+    });
 
     res.redirect('/Condominio/Listar');
 

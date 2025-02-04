@@ -46,6 +46,54 @@
 
     </div><!-- End Page Title -->
 
+        <!-- Casas -->
+        <section class="section faq">
+          <div class="row">
+          
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Tabela de Casas</h5>
+    
+                <!-- Table with hoverable rows -->
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th scope="col">ID</th>
+                      <th scope="col">Proprietario</th>
+                      <th scope="col">Localizacao</th>
+                      <th scope="col">Tipo</th>
+                      <th scope="col">Renda</th>
+                      <th scope="col">Fotos</th>
+                      <th scope="col">Apagar</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% if (casas.length > 0) { %>
+                      <% casas.forEach(casa => {%>
+                      <tr>
+                      <th scope="row"><%= casa.id%></th>
+                      <td><%= casa.proprietario%></td>
+                      <td><%= casa.localizacao%></td>
+                      <td><%= casa.numeroQuartos%></td>
+                      <td><%= casa.renda%></td>
+                      <td><a href="/Casa/Detalhes/<%= casa.id %>"><i class="bi bi-house-door"></i></a></td>
+                      <td><a class="apagarCasa" onclick="apagar('<%= casa.id %>', event)" ><i class="bi bi-trash"></i></a></td>
+                      </tr>
+                      <% }) %>
+                    <% } else{ %>
+                    <p>Ainda não tem Casas Criados</p>
+                      <% } %>   
+                  </tbody>
+                </table>
+                <!-- End Table with hoverable rows -->
+    
+              </div>
+            </div>
+    
+          </div>
+    
+        </section><!-- End Casas -->
+
     <!-- Condominios -->
     <section class="section faq">
       <div class="row">
@@ -104,65 +152,6 @@
       </div>
 
     </section><!-- End Condominios -->
-
-    <!-- Casas -->
-    <section class="section faq">
-      <div class="row">
-      
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Tabela de Casas</h5>
-
-            <!-- Table with hoverable rows -->
-            <table class="table table-hover">
-              <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Proprietario</th>
-                  <th scope="col">Localização</th>
-                  <th scope="col">Renda</th>
-                  <th scope="col">Estado</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Marcelo</td>
-                  <td>Maputo</td>
-                  <td>25000mt</td>
-                  <td>ocupada</td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Certão</td>
-                  <td>Matola</td>
-                  <td>15000Mt</td>
-                  <td>ocupada</td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>Feliciano</td>
-                  <td>Bairro Central</td>
-                  <td>30000Mt</td>
-                  <td>disponivel</td>
-                </tr>
-                <tr>
-                  <th scope="row">4</th>
-                  <td>Manuela</td>
-                  <td>Matola</td>
-                  <td>20000Mt</td>
-                  <td>disponivel</td>
-                </tr>
-              </tbody>
-            </table>
-            <!-- End Table with hoverable rows -->
-
-          </div>
-        </div>
-
-      </div>
-
-    </section><!-- End Casas -->
 
   </main><!-- End Main -->
 
