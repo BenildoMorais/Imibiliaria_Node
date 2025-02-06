@@ -15,7 +15,9 @@
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet">
 
   <!-- Vendor CSS Files -->
   <link href="/public/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -35,99 +37,71 @@
   <!-- ======= Header ======= -->
   <%- include('./partials/header.ejs') %>
 
-  <!-- ======= Sidebar ======= -->
-  <%- include('./partials/sidebar.ejs') %>
+    <!-- ======= Sidebar ======= -->
+    <%- include('./partials/sidebar.ejs') %>
 
-  <!-- ======= Main ======= -->
-  <main id="main" class="main">
+      <!-- ======= Main ======= -->
+      <main id="main" class="main">
 
-    <div class="pagetitle">
-      <h1>Condominios</h1>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="/home">Home</a></li>
-          <li class="breadcrumb-item">Condominios</li>
-          <li class="breadcrumb-item active">Listar</li>
-        </ol>
-      </nav>
-    </div><!-- End Page Title -->
+        <div class="pagetitle">
+          <h1>Condominios</h1>
+          <nav>
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="/home">Home</a></li>
+              <li class="breadcrumb-item">Condominios</li>
+              <li class="breadcrumb-item active">Listar</li>
+            </ol>
+          </nav>
+        </div><!-- End Page Title -->
 
-    <section class="section faq">
-      <div class="row">
-      
-        <div class="card">
-          <div class="card-body">
+        <section class="section faq">
+          <div class="row">
 
-            <!-- Table with hoverable rows -->
-            <table class="table table-hover">
-              <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Código</th>
-                  <th scope="col">Numero de casas</th>
-                  <th scope="col">Casas disponiveis</th>
-                  <th scope="col">Data de Criação</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>C01</td>
-                  <td>5</td>
-                  <td>0</td>
-                  <td>2016-05-25</td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>C02</td>
-                  <td>10</td>
-                  <td>3</td>
-                  <td>2014-12-05</td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>C03</td>
-                  <td>9</td>
-                  <td>4</td>
-                  <td>2011-08-12</td>
-                </tr>
-                <tr>
-                  <th scope="row">4</th>
-                  <td>C04</td>
-                  <td>8</td>
-                  <td>8</td>
-                  <td>2024-12-1</td>
-                </tr>
-              </tbody>
-            </table>
-            <!-- End Table with hoverable rows -->
-
+            <% if (condominios.length> 0) { %>
+              <% condominios.forEach(condominio=> {%>
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title"><%= condominio.codigo%></h5>
+  
+                <!-- List group With Icons -->
+                <ul class="list-group">
+                  <% if (condominio.casas.length> 0) { %>
+                    <% condominio.casas.forEach(casa=> {%>
+                      <li class="list-group-item"><a href="/Casa/Detalhes/<%= casa%>"><i class="bi bi-house-door"> </i></a> <%= casa%></li>
+                      <% }) %>
+                        <% } %>
+                </ul><!-- End List group With Icons -->
+  
+              </div>
+            </div>
+            <% }) %>
+                    <% } else{ %>
+                      <p>Ainda não tem Casas Condominios Criados</p>
+                      <% } %>
           </div>
-        </div>
 
-      </div>
+        </section>
 
-    </section>
+      </main><!-- End Main -->
 
-  </main><!-- End Main -->
+      <!-- ======= Footer ======= -->
+      <%- include('./partials/footer.ejs')%>
 
-  <!-- ======= Footer ======= -->
-  <%- include('./partials/footer.ejs')%>
+        <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+            class="bi bi-arrow-up-short"></i></a>
 
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+        <!-- Vendor JS Files -->
+        <script src="/public/vendor/apexcharts/apexcharts.min.js"></script>
+        <script src="/public/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="/public/vendor/chart.js/chart.umd.js"></script>
+        <script src="/public/vendor/echarts/echarts.min.js"></script>
+        <script src="/public/vendor/quill/quill.js"></script>
+        <script src="/public/vendor/simple-datatables/simple-datatables.js"></script>
+        <script src="/public/vendor/tinymce/tinymce.min.js"></script>
+        <script src="/public/vendor/php-email-form/validate.js"></script>
 
-  <!-- Vendor JS Files -->
-  <script src="/public/vendor/apexcharts/apexcharts.min.js"></script>
-  <script src="/public/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="/public/vendor/chart.js/chart.umd.js"></script>
-  <script src="/public/vendor/echarts/echarts.min.js"></script>
-  <script src="/public/vendor/quill/quill.js"></script>
-  <script src="/public/vendor/simple-datatables/simple-datatables.js"></script>
-  <script src="/public/vendor/tinymce/tinymce.min.js"></script>
-  <script src="/public/vendor/php-email-form/validate.js"></script>
-
-  <!-- Template Main JS File -->
-  <script src="/public/js/main.js"></script>
+        <!-- Template Main JS File -->
+        <script src="/public/js/main.js"></script>
 
 </body>
 

@@ -1,32 +1,49 @@
 const Condominio = require('../models/condominio');
+const Casa = require('../models/casa');
 const app = require('../config/SuporteErros');
 
 const condominio_criar_get = (req,res) => {
 
-    res.render('CriarNovoCondominio', {caminho: 'Novo Usuario'});
+    Casa.find().sort({ createAt: -1})
+    .then((result) => {
+        res.render('CriarNovoCondominio', { casas : result});
+    })
+    .catch((err) => {
+        console.log(err);
+        res.status(500).send('Algo Deu errado');
+    });
 
 };
 
-const condominio_criar_post = (req,res) => {
+const condominio_criar_post = (req,res, next) => {
 
-    const condominio = new Condominio(req.body);
+    var condominio = new Condominio(req.body);
+
+    condominio.casas = req.body.casas.split(",");
+    
+    console.log(req.body.casas);
 
     condominio.save()
     .then((result) => {
-        res.redirect('/User/Listar');
+        res.redirect('/Condominio/Listar');
     })
     .catch((err) => {
         const errors = app.handleErrors(err);
         res.status(400).json({errors});
     });
 
-    res.redirect('/Condominio/Listar');
-
 };
 
 const condominio_listar = (req,res) => {
     
-    res.render('ListarCondominio');
+    Condominio.find().sort({ createAt: -1})
+    .then((result) => {
+        res.render('ListarCondominio', { condominios : result});
+    })
+    .catch((err) => {
+        console.log(err);
+        res.status(500).send('Algo Deu errado');
+    });
     
 };
 

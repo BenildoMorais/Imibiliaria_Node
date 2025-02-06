@@ -4,11 +4,11 @@ const condominioSchema = new Schema({
 
     codigo: {
         type: String,
-        required: [true, 'Por favor insira o username'],
+        required: [true, 'Por favor insira um Codigo para o Condominio'],
     },
     casas: {
         type: [String],
-        required: [true, 'Por favor insira o email']
+        required: [true, 'Por favor selecione pelomenos uma casa']
     }
   
 }, {timestamps: true});
