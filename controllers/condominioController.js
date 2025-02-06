@@ -15,7 +15,7 @@ const condominio_criar_get = (req,res) => {
 
 };
 
-const condominio_criar_post = (req,res, next) => {
+const condominio_criar_post = (req,res) => {
 
     var condominio = new Condominio(req.body);
 
@@ -35,7 +35,7 @@ const condominio_criar_post = (req,res, next) => {
 };
 
 const condominio_listar = (req,res) => {
-    
+
     Condominio.find().sort({ createAt: -1})
     .then((result) => {
         res.render('ListarCondominio', { condominios : result});

@@ -65,18 +65,27 @@
   
                 <!-- List group With Icons -->
                 <ul class="list-group">
-                  <% if (condominio.casas.length> 0) { %>
-                    <% condominio.casas.forEach(casa=> {%>
-                      <li class="list-group-item"><a href="/Casa/Detalhes/<%= casa%>"><i class="bi bi-house-door"> </i></a> <%= casa%></li>
-                      <% }) %>
-                        <% } %>
+                  <% if (condominio.casas.length > 0) { %>
+                    <% condominio.casas.forEach(casa => { 
+                      let partes = casa.split(" - "); // Divide a string pelo " - "
+                      let id = partes[0]; // O ID é a primeira parte
+                      let localizacaoETipo = partes.slice(1).join(" - "); // Junta o restante
+                    %>
+                      <li class="list-group-item">
+                        <a href="/Casa/Detalhes/<%= id %>">
+                          <i class="bi bi-house-door"></i>
+                        </a> 
+                        <%= localizacaoETipo %>
+                      </li>
+                    <% }) %>
+                  <% } %>
                 </ul><!-- End List group With Icons -->
   
               </div>
             </div>
             <% }) %>
                     <% } else{ %>
-                      <p>Ainda não tem Casas Condominios Criados</p>
+                      <p>Ainda não tem Condominios Criados</p>
                       <% } %>
           </div>
 
